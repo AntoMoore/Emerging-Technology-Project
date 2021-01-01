@@ -1,8 +1,22 @@
-# code snips from: https://flask.palletsprojects.com/en/1.1.x/quickstart/#a-minimal-application
+# flask for web app.
+import flask as fl
+# numpy for numerical work.
+import numpy as np
 
-from flask import Flask
-app = Flask(__name__)
+# Create a new web app.
+app = fl.Flask(__name__)
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+# Add root route.
+@app.route("/")
+def home():
+  return app.send_static_file('index.html')
+
+# Add uniform route.
+@app.route('/api/uniform')
+def uniform():
+  return {"value": np.random.uniform()}
+
+# Add normal route.
+@app.route('/api/normal')
+def normal():
+  return {"value": np.random.normal()}
